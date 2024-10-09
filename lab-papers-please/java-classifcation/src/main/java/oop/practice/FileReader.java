@@ -25,16 +25,12 @@ public class FileReader {
                     String planet = individualNode.has("planet") ? individualNode.get("planet").asText() : "Earth";
                     int age = individualNode.has("age") ? individualNode.get("age").asInt() : 0;
 
-                    // Handle traits without a List
                     String[] traits = new String[individualNode.path("traits").size()];
                     for (int i = 0; i < traits.length; i++) {
                         traits[i] = individualNode.path("traits").get(i).asText();
                     }
 
-                    // Create an Individual object
                     Individual individual = new Individual(id, isHumanoid, planet, age, traits);
-
-                    // Print the individual directly
                     individual.PrintIndividual();
                 }
             }
