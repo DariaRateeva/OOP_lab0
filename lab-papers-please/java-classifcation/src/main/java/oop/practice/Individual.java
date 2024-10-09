@@ -16,23 +16,23 @@ public class Individual {
         this.age = age;
         this.traits = traits;
 
-        handleNullValues();
+        //handleNullValues();
     }
 
-    private void handleNullValues() {
-        if (this.isHumanoid == null) {
-            this.isHumanoid = false; // Default to false if isHumanoid is null
-        }
-        if (this.planet == null || this.planet.isEmpty()) {
-            this.planet = "Earth"; // Default to "Earth" if planet is null or empty
-        }
-        if (this.traits == null) {
-            this.traits = new String[0]; // Default to an empty array if traits are null
-        }
-        if (this.age == null) {
-            this.age = 0; // Default to 0 if age is null
-        }
-    }
+//    private void handleNullValues() {
+//        if (this.isHumanoid == null) {
+//            this.isHumanoid = false; // Default to false if isHumanoid is null
+//        }
+//        if (this.planet == null || this.planet.isEmpty()) {
+//            this.planet = "Earth"; // Default to "Earth" if planet is null or empty
+//        }
+//        if (this.traits == null) {
+//            this.traits = new String[0]; // Default to an empty array if traits are null
+//        }
+//        if (this.age == null) {
+//            this.age = 0; // Default to 0 if age is null
+//        }
+//    }
     public int getId() {
         return id;
     }
