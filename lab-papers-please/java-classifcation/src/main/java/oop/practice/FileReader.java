@@ -10,32 +10,31 @@ import java.util.List;
 
 public class FileReader {
 
-    public void parseAndPrintJson(String filePath) {
+    public List<Individual> readIndividualsFromFile(String filePath) {
+        List<Individual> individuals = new ArrayList<>();
+        ObjectMapper objectMapper = new ObjectMapper();
         try {
-            File inputFile = new File(filePath);
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode jsonData = objectMapper.readTree(inputFile);
+            JsonNode root = objectMapper.readTree(new File(filePath));
+            JsonNode dataArray = root.get("data");
 
-            JsonNode dataArray = jsonData.get("data");
+            for (JsonNode individualNode : dataArray) {
+                int id = individualNode.get("id").asInt();
+                boolean isHumanoid = individualNode.has("isHumanoid") ? individualNode.get("isHumanoid").asBoolean() : false;
+                String planet = individualNode.has("planet") ? individualNode.get("planet").asText() : "Earth";
+                int age = individualNode.has("age") ? individualNode.get("age").asInt() : 0;
 
-            if (dataArray.isArray()) {
-                for (JsonNode individualNode : dataArray) {
-                    int id = individualNode.get("id").asInt();
-                    boolean isHumanoid = individualNode.has("isHumanoid") ? individualNode.get("isHumanoid").asBoolean() : false;
-                    String planet = individualNode.has("planet") ? individualNode.get("planet").asText() : "Earth";
-                    int age = individualNode.has("age") ? individualNode.get("age").asInt() : 0;
-
-                    String[] traits = new String[individualNode.path("traits").size()];
-                    for (int i = 0; i < traits.length; i++) {
-                        traits[i] = individualNode.path("traits").get(i).asText();
-                    }
-
-                    Individual individual = new Individual(id, isHumanoid, planet, age, traits);
-                    individual.PrintIndividual();
+                String[] traits = new String[individualNode.path("traits").size()];
+                for (int i = 0; i < traits.length; i++) {
+                    traits[i] = individualNode.path("traits").get(i).asText();
                 }
+
+                Individual individual = new Individual(id, isHumanoid, planet, age, traits);
+                individuals.add(individual);
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return individuals;
     }
 }

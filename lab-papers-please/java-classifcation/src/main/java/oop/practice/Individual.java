@@ -8,6 +8,7 @@ public class Individual {
     private String planet;
     private Integer age;
     private String[] traits;
+    private String universe;
 
     public Individual(int id, boolean isHumanoid, String planet, int age, String[] traits) {
         this.id = id;
@@ -15,24 +16,8 @@ public class Individual {
         this.planet = planet;
         this.age = age;
         this.traits = traits;
-
-        //handleNullValues();
     }
 
-//    private void handleNullValues() {
-//        if (this.isHumanoid == null) {
-//            this.isHumanoid = false; // Default to false if isHumanoid is null
-//        }
-//        if (this.planet == null || this.planet.isEmpty()) {
-//            this.planet = "Earth"; // Default to "Earth" if planet is null or empty
-//        }
-//        if (this.traits == null) {
-//            this.traits = new String[0]; // Default to an empty array if traits are null
-//        }
-//        if (this.age == null) {
-//            this.age = 0; // Default to 0 if age is null
-//        }
-//    }
     public int getId() {
         return id;
     }
@@ -57,5 +42,20 @@ public class Individual {
         System.out.println("ID: " + id + ", isHumanoid: " + isHumanoid + ", Planet: " + planet + ", Age: " + age + ", Traits:" + Arrays.toString(traits));
     }
 
+    public String getUniverse() {
+        return universe;
+    }
+    public void setUniverse(String universe) {
+        this.universe = universe;
+    }
+
+    public boolean hasTrait(String trait){
+        for (String t : traits){
+            if(t.equals(trait)){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
