@@ -20,7 +20,7 @@ public class FileReader {
             for (JsonNode individualNode : dataArray) {
                 int id = individualNode.get("id").asInt();
                 boolean isHumanoid = individualNode.has("isHumanoid") ? individualNode.get("isHumanoid").asBoolean() : false;
-                String planet = individualNode.has("planet") ? individualNode.get("planet").asText() : "Earth";
+                String planet = individualNode.has("planet") ? individualNode.get("planet").asText() : "Unknown";
                 int age = individualNode.has("age") ? individualNode.get("age").asInt() : 0;
 
                 String[] traits = new String[individualNode.path("traits").size()];

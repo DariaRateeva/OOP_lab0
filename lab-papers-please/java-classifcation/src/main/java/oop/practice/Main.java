@@ -8,26 +8,28 @@ public class Main {
     FileReader fileReader = new FileReader();
     List<Individual> individuals = fileReader.readIndividualsFromFile("src/main/resources/input.json");
 
-    System.out.println("Individuals with even id: ");
-    for (Individual individual : individuals) {
-      if(individual.getId()%2 == 0) {
-        individual.PrintIndividual();
+    StarWarsClasifier starWarsClasifier = new StarWarsClasifier();
+    MarvelClasifier marvelClasifier = new MarvelClasifier();
+    HitchhikersClasifier hitchhikersClassifier = new HitchhikersClasifier();
+    LordOfTheRingsClasifier lordOfTheRingsClassifier = new LordOfTheRingsClasifier();
+
+    for(Individual individual : individuals){
+      if(starWarsClasifier.belongsToStarWars(individual)) {
+        System.out.println("ID: " + individual.getId() + " belongs to Star Wars");
+      } else if (marvelClasifier.belongsToMarvel(individual)) {
+        System.out.println("ID: " + individual.getId() + " belongs to Marvel");
+      }else if (hitchhikersClassifier.belongsToHitchhikers(individual)) {
+        System.out.println("ID: " + individual.getId() + " belongs to Hitchhiker's");
       }
-    }
-
-    System.out.println("Just humanoids");
-    for (Individual individual : individuals) {
-      if(individual.isHumanoid()) {
-        individual.PrintIndividual();
+      else if (lordOfTheRingsClassifier.belongsToLordOfTheRings(individual)) {
+        System.out.println("ID: " + individual.getId() + " belongs to Lord of The Rings");
       }
+      else{
+        System.out.println("ID: " + individual.getId() + " does not belong ");
+      }
+
     }
 
-    Classifier classifier = new Classifier();
 
-    for (Individual individual : individuals) {
-      String universe = classifier.classify(individual);
-      individual.setUniverse(universe);
-      System.out.println("ID: " + individual.getId() + ", Universe: " + individual.getUniverse());  // Should print the universe
-    }
   }
 }
