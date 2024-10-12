@@ -1,0 +1,6 @@
+[{"id":4,"planet":"Earth","age":0,"traits":["SHORT","BULKY"],"humanoid":false},
+  {"id":5,"planet":"Unknown","age":0,"traits":["BULKY"],"humanoid":true},
+  {"id":9,"planet":"Earth","age":124,"traits":["SHORT","BULKY"],"humanoid":true},
+  {"id":14,"planet":"Unknown","age":7523,"traits":[],"humanoid":true},
+  {"id":15,"planet":"Earth","age":451,"traits":["BLONDE","TALL"],"humanoid":true},
+  {"id":19,"planet":"Earth","age":451,"traits":["BLONDE","POINTY_EARS"],"humanoid":true}]

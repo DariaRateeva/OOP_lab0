@@ -8,7 +8,6 @@ public class Individual {
     private String planet;
     private Integer age;
     private String[] traits;
-    private String universe;
 
     public Individual(int id, boolean isHumanoid, String planet, int age, String[] traits) {
         this.id = id;
@@ -40,13 +39,6 @@ public class Individual {
 
     public void PrintIndividual(){
         System.out.println("ID: " + id + ", isHumanoid: " + isHumanoid + ", Planet: " + planet + ", Age: " + age + ", Traits:" + Arrays.toString(traits));
-    }
-
-    public String getUniverse() {
-        return universe;
-    }
-    public void setUniverse(String universe) {
-        this.universe = universe;
     }
 
     public boolean hasTrait(String trait){
