@@ -2,6 +2,8 @@ package oop.practice;
 
 import java.util.Arrays;
 
+//class individual that contains a constructor for individual initialization
+// with parameters id, isHumanoid, planet, age and traits
 public class Individual {
     private int id;
     private Boolean isHumanoid;
@@ -35,10 +37,6 @@ public class Individual {
 
     public String[] getTraits() {
         return traits;
-    }
-
-    public void PrintIndividual(){
-        System.out.println("ID: " + id + ", isHumanoid: " + isHumanoid + ", Planet: " + planet + ", Age: " + age + ", Traits:" + Arrays.toString(traits));
     }
 
     public boolean hasTrait(String trait){

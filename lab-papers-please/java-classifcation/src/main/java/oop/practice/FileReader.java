@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+//this class reads the information from the JSON file and created a new Java object with the data from the read file
 public class FileReader {
 
     public List<Individual> readIndividualsFromFile(String filePath) {

@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+//in the main class I call all the necessary methods for sorting the individuals from input.json into 4
+//separate JSON files for each universe
 public class Main {
   public static void main(String[] args) {
 
@@ -33,8 +36,8 @@ public class Main {
     }
   }
 
+  //method that classifies each individual into one of the 4 universes
   private static Map<String, List<Individual>> classifyIndividuals(List<Individual> individuals) {
-    // Instantiate your classifiers and add classification logic here
     StarWarsClasifier starWarsClasifier = new StarWarsClasifier();
     MarvelClasifier marvelClasifier = new MarvelClasifier();
     HitchhikersClasifier hitchhikersClassifier = new HitchhikersClasifier();
@@ -48,7 +51,7 @@ public class Main {
     classifiedIndividuals.put("Hitchhikers", new ArrayList<>());
     classifiedIndividuals.put("LordOfTheRings", new ArrayList<>());
 
-    // Classify each individual
+    // Classifying each individual
     for (Individual individual : individuals) {
       if (starWarsClasifier.belongsToStarWars(individual)) {
         classifiedIndividuals.get("StarWars").add(individual);

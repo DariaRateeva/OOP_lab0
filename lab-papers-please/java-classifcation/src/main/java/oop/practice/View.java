@@ -7,11 +7,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+//this class convert Java object into JSON format
 public class View {
     private ObjectMapper objectMapper;
     public View(){
         this.objectMapper = new ObjectMapper();
     }
+
+    //this method  writes a list of individuals to the JSON file
     public void writeToFiles(String universeName, List<Individual> individuals){
         try{
             File directory = new File("output");
