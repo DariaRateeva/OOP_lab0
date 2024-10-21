@@ -1,58 +1,71 @@
 package oop.practice;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Map;
 
+
+//in the main class I call all the necessary methods for sorting the individuals from input.json into 4
+//separate JSON files for each universe
 public class Main {
-  public static void main(String[] args) throws IOException {
-    ObjectMapper mapper = new ObjectMapper();
-    File inputFile = new File("src/main/resources/test-input.json");
-    JsonNode data = mapper.readTree(inputFile).get("data");
+  public static void main(String[] args) {
 
-    Universe starWars = new Universe("starWars", new ArrayList<>());
-    Universe hitchhikers = new Universe("hitchHiker", new ArrayList<>());
-    Universe marvel = new Universe("marvel", new ArrayList<>());
-    Universe rings = new Universe("rings", new ArrayList<>());
+    FileReader fileReader = new FileReader();
+    List<Individual> individuals = fileReader.readIndividualsFromFile("src/main/resources/input.json");
 
-    Scanner scanner = new Scanner(System.in);
+    if (individuals == null || individuals.isEmpty()) {
+      System.out.println("No individuals found in the input file.");
+      return;
+    }
 
-    for (JsonNode entry : data) {
-      String entryAsString = entry.toString();
-      System.out.println(entryAsString);
-      String userInput = scanner.nextLine();
-      switch (userInput) {
-        case "1":
-          starWars.individuals().add(entry);
-          break;
-        case "2":
-          hitchhikers.individuals().add(entry);
-          break;
-        case "3":
-          marvel.individuals().add(entry);
-          break;
-        case "4":
-          rings.individuals().add(entry);
-          break;
-        default:
-          System.out.println("Invalid input");
+    Map<String, List<Individual>> classifiedIndividuals = classifyIndividuals(individuals);
+
+    if (classifiedIndividuals == null) {
+      System.out.println("Classification failed. No classified individuals.");
+      return;
+    }
+
+    View view = new View();
+
+    for (Map.Entry<String, List<Individual>> entry : classifiedIndividuals.entrySet()) {
+      String universeName = entry.getKey();
+      List<Individual> individualsInUniverse = entry.getValue();
+
+      view.writeToFiles(universeName, individualsInUniverse);
+    }
+  }
+
+  //method that classifies each individual into one of the 4 universes
+  private static Map<String, List<Individual>> classifyIndividuals(List<Individual> individuals) {
+    StarWarsClasifier starWarsClasifier = new StarWarsClasifier();
+    MarvelClasifier marvelClasifier = new MarvelClasifier();
+    HitchhikersClasifier hitchhikersClassifier = new HitchhikersClasifier();
+    LordOfTheRingsClasifier lordOfTheRingsClassifier = new LordOfTheRingsClasifier();
+
+    Map<String, List<Individual>> classifiedIndividuals = new HashMap<>();
+
+
+    classifiedIndividuals.put("StarWars", new ArrayList<>());
+    classifiedIndividuals.put("Marvel", new ArrayList<>());
+    classifiedIndividuals.put("Hitchhikers", new ArrayList<>());
+    classifiedIndividuals.put("LordOfTheRings", new ArrayList<>());
+
+    // Classifying each individual
+    for (Individual individual : individuals) {
+      if (starWarsClasifier.belongsToStarWars(individual)) {
+        classifiedIndividuals.get("StarWars").add(individual);
+      } else if (marvelClasifier.belongsToMarvel(individual)) {
+        classifiedIndividuals.get("Marvel").add(individual);
+      } else if (hitchhikersClassifier.belongsToHitchhikers(individual)) {
+        classifiedIndividuals.get("Hitchhikers").add(individual);
+      } else if (lordOfTheRingsClassifier.belongsToLordOfTheRings(individual)) {
+        classifiedIndividuals.get("LordOfTheRings").add(individual);
+      } else {
+        System.out.println("Individual with ID " + individual.getId() + " doesn't belong to any known universe.");
       }
     }
 
-    scanner.close();
-    mapper.writeValue(new File("src/main/resources/output/starwars.json"), starWars);
-    mapper.writeValue(new File("src/main/resources/output/hitchhiker.json"), hitchhikers);
-    mapper.writeValue(new File("src/main/resources/output/rings.json"), rings);
-    mapper.writeValue(new File("src/main/resources/output/marvel.json"), marvel);
+    return classifiedIndividuals;
   }
 }
-
-record Universe(
-    String name,
-    List<JsonNode> individuals
-) { }
