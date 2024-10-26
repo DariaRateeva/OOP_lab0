@@ -62,7 +62,7 @@ public class TextData {
     public int getNumberOfSentences() {
         int count = 0;
         for (int i = 0; i < text.length(); i++) {
-            if(text.charAt(i) == '.'){
+            if(text.charAt(i) == '.' || text.charAt(i) == '!' || text.charAt(i) == '?'){
                 count++;
             }
         }
