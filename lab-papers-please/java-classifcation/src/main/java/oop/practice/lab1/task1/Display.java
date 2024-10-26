@@ -13,6 +13,22 @@ public class Display {
         this.model = model;
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public float getPpi() {
+        return ppi;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
     public void compareSize(Display m){
         int area1 = width*height;
         int area2 = m.width*m.height;
@@ -38,5 +54,9 @@ public class Display {
     public void compareWithMonitor(Display m){
         compareSize(m);
         compareSharpness(m);
+    }
+
+    public static void printDisplayInfo(Display d){
+        System.out.println("Display model: " + d.getModel() + ", width: " + d.getWidth() + ", height: " + d.getHeight() + ", pixels per inch: " + d.getPpi());
     }
 }
