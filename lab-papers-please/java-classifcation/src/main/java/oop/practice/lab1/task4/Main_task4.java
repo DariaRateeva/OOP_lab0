@@ -1,14 +1,12 @@
 package oop.practice.lab1.task4;
 
-import oop.practice.lab1.task2.FileReader;
-import oop.practice.lab1.task2.TextData;
 
+import oop.practice.lab1.task2.TextData;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import javax.annotation.processing.Filer;
 import java.io.File;
-import java.nio.file.Files;
+
 
 public class Main_task4 {
     public static void main(String[] args) throws IOException {
@@ -36,7 +34,7 @@ public class Main_task4 {
                 System.out.println("Error reading file: " + filePath);
                 e.printStackTrace();
                 }
-//
+
             }
         }
 
