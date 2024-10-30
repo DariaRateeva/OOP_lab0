@@ -1,0 +1,4 @@
+Hello! How are you doing today? I hope everything is going well.
+This file is created to test punctuation marks in the text parsing program. It includes sentences with various types of punctuation: periods, exclamation marks, and question marks.
+Is this enough variety? Maybe, maybe not! Let's see if it works as expected.
+Well, here’s the end of this sample. Good luck with the test!
