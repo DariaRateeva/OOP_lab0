@@ -23,5 +23,10 @@ public class Cappuccino extends Coffee {
         this.mlOfMilk = mlOfMilk;
     }
 
+    @Override
+    public void printCoffeeDetails(){
+        super.printCoffeeDetails();
+        System.out.println(name + " volume of milk: " + mlOfMilk);
+    }
 
 }

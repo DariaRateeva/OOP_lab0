@@ -26,4 +26,9 @@ public class Coffee {
     public String getName() {
         return name;
     }
+
+    public void printCoffeeDetails(){
+        System.out.println("Coffee name: " + name);
+        System.out.println("Coffee intensity: " + coffeeIntensity);
+    }
 }

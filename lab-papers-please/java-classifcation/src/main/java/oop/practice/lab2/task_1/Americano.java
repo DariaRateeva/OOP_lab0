@@ -15,4 +15,11 @@ public class Americano extends Coffee{
     public void setMlOfWater(int mlOfWater) {
         this.mlOfWater = mlOfWater;
     }
+
+    @Override
+    public void printCoffeeDetails(){
+        super.printCoffeeDetails();
+        System.out.println(name + "volume of water: " + mlOfWater);
+    }
+
 }

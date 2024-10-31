@@ -15,4 +15,10 @@ public class PumpkinSpiceLatte extends Cappuccino{
     public void setMgOfPumpkinSpice(int mgOfPumpkinSpice) {
         this.mgOfPumpkinSpice = mgOfPumpkinSpice;
     }
+
+    @Override
+    public void printCoffeeDetails(){
+        super.printCoffeeDetails();
+        System.out.println(name + " amount of pumpkin spice: " + mgOfPumpkinSpice);
+    }
 }
