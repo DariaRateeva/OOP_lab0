@@ -21,4 +21,9 @@ public class PumpkinSpiceLatte extends Cappuccino{
         super.printCoffeeDetails();
         System.out.println(name + " amount of pumpkin spice: " + mgOfPumpkinSpice);
     }
+
+    public void makePumpkinSpiceLatte(){
+        super.makeCappuccino();
+        System.out.println("Adding " + mgOfPumpkinSpice + " mg of pumpkin spice");
+    }
 }

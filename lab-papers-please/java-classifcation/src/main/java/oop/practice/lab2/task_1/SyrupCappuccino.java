@@ -22,4 +22,9 @@ public class SyrupCappuccino extends Cappuccino {
         System.out.println(name + " with syrup taste: " + syrup.toString());
     }
 
+    public void makeSyrupCappuccino(){
+        super.makeCappuccino();
+        System.out.println("Adding " + syrup.toString() + " flavored syrup");
+    }
+
 }
