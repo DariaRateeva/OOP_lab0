@@ -5,74 +5,100 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class Task2Test {
 
-
     @Test
     public void testPeopleDinner() {
+        System.out.println("===== Test 1: PeopleDinner =====");
+
         PeopleDinner peopleDinner = new PeopleDinner();
 
-        peopleDinner.serveDinner("Car1");
-        peopleDinner.serveDinner("NoDineCar2");
-        peopleDinner.serveDinner("Car3");
-        peopleDinner.serveDinner("NoDineCar4");
+        peopleDinner.serveDinner(1);
+        peopleDinner.serveDinner(2);
+        peopleDinner.serveDinner(5);
+        peopleDinner.serveDinner(4);
 
         assertEquals(2, peopleDinner.getServedCount());
-
         assertEquals(2, peopleDinner.getSkippedCount());
 
-        assertTrue(peopleDinner.getSkippedCars().contains("NoDineCar2"));
-        assertTrue(peopleDinner.getSkippedCars().contains("NoDineCar4"));
+        System.out.println("===== End of Test 1 =====\n");
     }
 
     @Test
-    public void testRobotDinner() {
+    public void testRobotDinnerSkipCars() {
+        System.out.println("===== Test 2: RobotDinner Skip Cars =====");
+
         RobotDinner robotDinner = new RobotDinner();
 
-        robotDinner.serveDinner("Car1");
-        robotDinner.serveDinner("NoDineCar2");
-        robotDinner.serveDinner("Car3");
+        robotDinner.serveDinner(1);
+        robotDinner.serveDinner(5);
+        robotDinner.serveDinner(3);
 
         assertEquals(2, robotDinner.getServedCount());
-
         assertEquals(1, robotDinner.getSkippedCount());
 
-        assertTrue(robotDinner.getSkippedCars().contains("NoDineCar2"));
+        System.out.println("===== End of Test 2 =====\n");
     }
 
     @Test
-    public void testGasStation() {
+    public void testStation() {
+        System.out.println("===== Test 3: GasStation =====");
+
         GasStation gasStation = new GasStation();
-
-        gasStation.refuel("Car1");
-        gasStation.refuel("Car2");
-
-        assertEquals(2, gasStation.getRefueledCount());
-    }
-
-    @Test
-    public void testElectricStation() {
         ElectricStation electricStation = new ElectricStation();
 
-        electricStation.refuel("Car1");
+        gasStation.refuel(1);
+        electricStation.refuel(2);
+        gasStation.refuel(3);
 
+        assertEquals(2, gasStation.getRefueledCount());
         assertEquals(1, electricStation.getRefueledCount());
+
+        System.out.println("===== End of Test 3 =====\n");
     }
 
     @Test
     public void testTotalServedAndRefueled() {
+        System.out.println("===== Test 4: Total Served and Refueled =====");
+
         PeopleDinner peopleDinner = new PeopleDinner();
         RobotDinner robotDinner = new RobotDinner();
         GasStation gasStation = new GasStation();
         ElectricStation electricStation = new ElectricStation();
 
-        peopleDinner.serveDinner("Car1");
-        robotDinner.serveDinner("Car2");
-        gasStation.refuel("Car3");
-        electricStation.refuel("Car4");
+        peopleDinner.serveDinner(1);
+        robotDinner.serveDinner(3);
+        gasStation.refuel(3);
+        electricStation.refuel(4);
 
         int totalServed = peopleDinner.getServedCount() + robotDinner.getServedCount();
-        assertEquals(2, totalServed);
+        assertEquals(1, totalServed);
 
         int totalRefueled = gasStation.getRefueledCount() + electricStation.getRefueledCount();
         assertEquals(2, totalRefueled);
+
+        System.out.println("===== End of Test 4 =====\n");
     }
+
+    @Test
+    public void testSkippedCars() {
+        System.out.println("===== Test 5:  Skipped Cars =====");
+
+        PeopleDinner peopleDinner = new PeopleDinner();
+        RobotDinner robotDinner = new RobotDinner();
+
+        peopleDinner.serveDinner(2);
+        peopleDinner.serveDinner(5);
+        robotDinner.serveDinner(6);
+        robotDinner.serveDinner(7);
+
+        assertEquals(1, peopleDinner.getServedCount());
+        assertEquals(1, peopleDinner.getSkippedCount());
+        assertTrue(peopleDinner.getSkippedCars().contains("Car2"));
+
+        assertEquals(1, robotDinner.getServedCount());
+        assertEquals(1, robotDinner.getSkippedCount());
+        assertTrue(robotDinner.getSkippedCars().contains("Car6"));
+
+        System.out.println("===== End of Test Skipped Cars =====\n");
+    }
+
 }

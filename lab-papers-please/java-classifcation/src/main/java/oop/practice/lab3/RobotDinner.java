@@ -7,16 +7,28 @@ public class RobotDinner implements Dineable {
     private int servedCount = 0;
     private Set<String> skippedCars = new HashSet<>();
 
+//    @Override
+//    public void serveDinner(String carId) {
+//        if (carId.startsWith("NoDine")) {
+//            System.out.println("Skipping dinner for car " + carId);
+//            skippedCars.add(carId);
+//        } else {
+//            System.out.println("Serving dinner to robots in car " + carId);
+//            servedCount++;
+//        }
+//    }
+
     @Override
-    public void serveDinner(String carId) {
-        if (carId.startsWith("NoDine")) {
+    public void serveDinner(int carId) {
+        if (carId % 3 == 0) { // Example condition for skipping
             System.out.println("Skipping dinner for car " + carId);
-            skippedCars.add(carId);
+            skippedCars.add("Car" + carId);
         } else {
             System.out.println("Serving dinner to robots in car " + carId);
             servedCount++;
         }
     }
+
 
     public int getServedCount() {
         return servedCount;
