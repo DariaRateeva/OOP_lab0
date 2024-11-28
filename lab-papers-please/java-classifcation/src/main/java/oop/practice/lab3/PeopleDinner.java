@@ -5,18 +5,9 @@ import java.util.Set;
 
 public class PeopleDinner implements Dineable {
     private int servedCount = 0;
-    private Set<String> skippedCars = new HashSet<>(); // To track cars that don’t dine
+    private Set<String> skippedCars = new HashSet<>();
+    private static int totalPeople = 0;
 
-//    @Override
-//    public void serveDinner(String carId) {
-//        if (carId.startsWith("NoDine")) {
-//            System.out.println("Skipping dinner for car " + carId);
-//            skippedCars.add(carId);
-//        } else {
-//            System.out.println("Serving dinner to people in car " + carId);
-//            servedCount++;
-//        }
-    //}
     @Override
     public void serveDinner(int carId) {
         if (carId % 2 == 0) { // Example condition for skipping
@@ -38,5 +29,9 @@ public class PeopleDinner implements Dineable {
 
     public Set<String> getSkippedCars() {
         return skippedCars;
+    }
+
+    public static void countPeople(){
+        totalPeople++;
     }
 }

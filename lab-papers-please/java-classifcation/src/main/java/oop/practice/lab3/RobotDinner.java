@@ -6,21 +6,11 @@ import java.util.Set;
 public class RobotDinner implements Dineable {
     private int servedCount = 0;
     private Set<String> skippedCars = new HashSet<>();
-
-//    @Override
-//    public void serveDinner(String carId) {
-//        if (carId.startsWith("NoDine")) {
-//            System.out.println("Skipping dinner for car " + carId);
-//            skippedCars.add(carId);
-//        } else {
-//            System.out.println("Serving dinner to robots in car " + carId);
-//            servedCount++;
-//        }
-//    }
+    private static int countRobots = 0;
 
     @Override
     public void serveDinner(int carId) {
-        if (carId % 3 == 0) { // Example condition for skipping
+        if (carId % 3 == 0) {
             System.out.println("Skipping dinner for car " + carId);
             skippedCars.add("Car" + carId);
         } else {
@@ -40,5 +30,9 @@ public class RobotDinner implements Dineable {
 
     public Set<String> getSkippedCars() {
         return skippedCars;
+    }
+
+    public static void countRobots(){
+        countRobots++;
     }
 }
