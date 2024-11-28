@@ -1,21 +1,27 @@
 package oop.practice.lab3;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class PeopleDinner implements Dineable {
     private int servedCount = 0;
-    private Set<String> skippedCars = new HashSet<>();
+    private Set<Integer> skippedCars = new HashSet<>();
     private static int totalPeople = 0;
+    private static int totalDining = 0;
+    private static int totalNotDining = 0;
 
     @Override
-    public void serveDinner(int carId) {
-        if (carId % 2 == 0) { // Example condition for skipping
-            System.out.println("Skipping dinner for car " + carId);
-            skippedCars.add("Car" + carId);
-        } else {
-            System.out.println("Serving dinner to people in car " + carId);
+    public void serveDinner(Car car) {
+        if (car.isDining()) {
+            System.out.println("Serving dinner to people in car " + car.getId());
             servedCount++;
+            totalDining++;
+        } else {
+            System.out.println("Skipping dinner for people in car " + car.getId());
+            skippedCars.add(car.getId());
+            totalNotDining++;
         }
     }
 
@@ -27,11 +33,24 @@ public class PeopleDinner implements Dineable {
         return skippedCars.size();
     }
 
-    public Set<String> getSkippedCars() {
+    public Set<Integer> getSkippedCars() {
         return skippedCars;
     }
 
-    public static void countPeople(){
+    public static void countPeople() {
         totalPeople++;
+    }
+
+    // New Getter Methods
+    public static int getTotalPeople() {
+        return totalPeople;
+    }
+
+    public static int getTotalDining() {
+        return totalDining;
+    }
+
+    public static int getTotalNotDining() {
+        return totalNotDining;
     }
 }

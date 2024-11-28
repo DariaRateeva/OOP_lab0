@@ -1,13 +1,23 @@
 package oop.practice.lab3;
 
-public class Car {
-    private int id;
-    private String type;
-    private String passengers;
-    private boolean isDining;
-    private int consumption;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    public Car(int id, String type, String passengers, boolean isDining, int consumption) {
+public class Car {
+    private final int id;
+    private final String type;
+    private final String passengers;
+    private final boolean isDining;
+    private final int consumption;
+
+    @JsonCreator
+    public Car(
+            @JsonProperty("id") int id,
+            @JsonProperty("type") String type,
+            @JsonProperty("passengers") String passengers,
+            @JsonProperty("isDining") boolean isDining,
+            @JsonProperty("consumption") int consumption
+    ) {
         this.id = id;
         this.type = type;
         this.passengers = passengers;

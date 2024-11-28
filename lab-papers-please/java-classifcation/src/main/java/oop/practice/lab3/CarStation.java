@@ -5,6 +5,9 @@ public class CarStation {
     private Refuelable refuelingService;
     private Queue<Car> queue;
 
+    private int totalCarsProcessed = 0;
+    private int totalConsumption = 0;
+
     public CarStation(Dineable diningService, Refuelable refuelingService, Queue<Car> queue) {
         this.diningService = diningService;
         this.refuelingService = refuelingService;
@@ -26,15 +29,43 @@ public class CarStation {
                 PeopleDinner.countPeople();
             }
 
-            if (car.isDining()){
-                diningService.serveDinner(car.getId());
-            }
+//            if (car.isDining()){
+//                diningService.serveDinner(car);
+//            }
+            diningService.serveDinner(car);
+
             refuelingService.refuel(car.getId());
+            totalCarsProcessed++;
+            totalConsumption += car.getConsumption();
             System.out.println("Car " + car.getId() + " has been served.\n");
         }
+    }
+
+    // New Methods to Retrieve Totals
+    public int getTotalCarsProcessed() {
+        return totalCarsProcessed;
+    }
+
+    public int getTotalConsumption() {
+        return totalConsumption;
+    }
+
+    // Methods to retrieve totals by type
+    public int getTotalCarsProcessed(String type) {
+        return this.totalCarsProcessed;
+    }
+
+    public int getTotalConsumption(String type) {
+        return this.totalConsumption;
+    }
+
+    public Refuelable getRefuelingService() {
+        return this.refuelingService;
     }
 
     public Queue<Car> getQueue(){
         return this.queue;
     }
+
+
 }
