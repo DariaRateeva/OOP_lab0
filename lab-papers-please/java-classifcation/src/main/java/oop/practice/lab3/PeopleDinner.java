@@ -1,8 +1,6 @@
 package oop.practice.lab3;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public class PeopleDinner implements Dineable {
@@ -25,23 +23,10 @@ public class PeopleDinner implements Dineable {
         }
     }
 
-    public int getServedCount() {
-        return servedCount;
-    }
-
-    public int getSkippedCount() {
-        return skippedCars.size();
-    }
-
-    public Set<Integer> getSkippedCars() {
-        return skippedCars;
-    }
-
     public static void countPeople() {
         totalPeople++;
     }
 
-    // New Getter Methods
     public static int getTotalPeople() {
         return totalPeople;
     }

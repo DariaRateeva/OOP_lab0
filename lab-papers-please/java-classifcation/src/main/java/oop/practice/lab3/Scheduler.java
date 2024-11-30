@@ -12,13 +12,15 @@ public class Scheduler {
     }
 
     public void startScheduler(String folderPath) {
+        semaphore.initializeQueue(folderPath);
+
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
 
-        // Task to monitor and process new JSON files every 3 seconds
+        // Monitor and process new JSON files every 3 seconds
         executor.scheduleWithFixedDelay(() -> semaphore.monitorQueueFolder(folderPath),
                 0, 3, TimeUnit.SECONDS);
 
-        // Task to serve cars every 5 seconds
+        // Serve cars every 5 seconds
         executor.scheduleWithFixedDelay(() -> semaphore.serveAll(),
                 0, 5, TimeUnit.SECONDS);
     }

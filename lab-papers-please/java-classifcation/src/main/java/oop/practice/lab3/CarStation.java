@@ -16,7 +16,6 @@ public class CarStation {
 
     public void addCar(Car car) {
         queue.enqueue(car);
-        System.out.println(car.getId() + " added to the queue.");
     }
 
     public void serveCars() {
@@ -28,10 +27,6 @@ public class CarStation {
             if (car.getPassengers().equals("PEOPLE")){
                 PeopleDinner.countPeople();
             }
-
-//            if (car.isDining()){
-//                diningService.serveDinner(car);
-//            }
             diningService.serveDinner(car);
 
             refuelingService.refuel(car.getId());
@@ -41,7 +36,6 @@ public class CarStation {
         }
     }
 
-    // New Methods to Retrieve Totals
     public int getTotalCarsProcessed() {
         return totalCarsProcessed;
     }
@@ -49,23 +43,5 @@ public class CarStation {
     public int getTotalConsumption() {
         return totalConsumption;
     }
-
-    // Methods to retrieve totals by type
-    public int getTotalCarsProcessed(String type) {
-        return this.totalCarsProcessed;
-    }
-
-    public int getTotalConsumption(String type) {
-        return this.totalConsumption;
-    }
-
-    public Refuelable getRefuelingService() {
-        return this.refuelingService;
-    }
-
-    public Queue<Car> getQueue(){
-        return this.queue;
-    }
-
 
 }

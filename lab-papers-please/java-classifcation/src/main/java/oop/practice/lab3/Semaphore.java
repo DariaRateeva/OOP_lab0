@@ -23,11 +23,31 @@ public class Semaphore {
         stations.put(type, station);
     }
 
+    public void initializeQueue(String folderPath) {
+        try {
+            File folder = new File(folderPath);
+            if (!folder.exists()) {
+                folder.mkdirs();
+                System.out.println("Created folder: " + folderPath);
+                return;
+            }
+
+            File[] files = folder.listFiles((dir, name) -> name.endsWith(".json"));
+            if (files != null) {
+                for (File file : files) {
+                    processFile(file);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error initializing queue: " + e.getMessage());
+        }
+    }
+
     public void monitorQueueFolder(String folderPath) {
         try {
             Path path = Paths.get(folderPath);
             if (!Files.exists(path)) {
-                Files.createDirectories(path); // Create the directory if it doesn't exist
+                Files.createDirectories(path);
                 System.out.println("Created folder: " + folderPath);
             }
 
@@ -68,7 +88,6 @@ public class Semaphore {
                 System.out.println("No station registered for car type: " + car.getType());
             }
 
-            // Delete file after processing
             if (!file.delete()) {
                 System.err.println("Failed to delete file: " + file.getName());
             }
@@ -86,24 +105,21 @@ public class Semaphore {
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastCarAddedTime > 5000) { // 5 seconds of inactivity
             printTotals();
-            shutdownProgram(); // Stop the program after printing totals
+            shutdownProgram();
         }
     }
 
     private void shutdownProgram() {
         System.out.println("Shutting down the program...");
-        System.exit(0); // Gracefully terminate the program
+        System.exit(0);
     }
 
-
     private void printTotals() {
-        // Retrieve cumulative counts from PeopleDinner and RobotDinner
         int totalPeople = PeopleDinner.getTotalPeople();
         int totalRobots = RobotDinner.getTotalRobots();
         int totalDining = PeopleDinner.getTotalDining() + RobotDinner.getTotalDining();
         int totalNotDining = PeopleDinner.getTotalNotDining() + RobotDinner.getTotalNotDining();
 
-        // Calculate car counts and consumption totals by type
         Map<String, Integer> carCounts = new HashMap<>();
         Map<String, Integer> consumptionTotals = new HashMap<>();
 
@@ -123,6 +139,5 @@ public class Semaphore {
         System.out.println("DINING: " + totalDining);
         System.out.println("NOT_DINING: " + totalNotDining);
     }
-
-
 }
+

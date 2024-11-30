@@ -9,18 +9,4 @@ public class GasStation implements Refuelable{
         System.out.println("Refueling gas car " + carId);
         refueledCount++;
     }
-
-    public void refuel(Car car) {
-        System.out.println("Refueling gas car " + car.getId());
-        refueledCount++;
-        totalGasConsumption += car.getConsumption();
-    }
-
-    public int getRefueledCount() {
-        return refueledCount;
-    }
-
-    public int getTotalGasConsumption() {
-        return totalGasConsumption;
-    }
 }

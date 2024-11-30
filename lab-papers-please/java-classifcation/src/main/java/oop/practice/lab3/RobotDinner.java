@@ -23,23 +23,10 @@ public class RobotDinner implements Dineable {
         }
     }
 
-    public int getServedCount() {
-        return servedCount;
-    }
-
-    public int getSkippedCount() {
-        return skippedCars.size();
-    }
-
-    public Set<Integer> getSkippedCars() {
-        return skippedCars;
-    }
-
     public static void countRobots() {
         totalRobots++;
     }
 
-    // New Getter Methods
     public static int getTotalRobots() {
         return totalRobots;
     }

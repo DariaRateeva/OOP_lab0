@@ -2,7 +2,6 @@ package oop.practice.lab3;
 
 public class Main {
     public static void main(String[] args) {
-        // Use an absolute path to the queue folder
         String folderPath = "src/main/java/oop/practice/lab3/queue";
 
         Semaphore semaphore = new Semaphore();

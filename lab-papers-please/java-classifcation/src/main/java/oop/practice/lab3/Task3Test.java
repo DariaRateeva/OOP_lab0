@@ -40,7 +40,6 @@ public class Task3Test {
 
     @Test
     public void testAllCarsWantDinner() {
-        // Add cars that all want dinner
         carStation.addCar(new Car(4,"GAS", "PEOPLE", true,10));
         carStation.addCar(new Car(5,"ELECTRIC", "ROBOTS", true,10));
         carStation.addCar(new Car(6,"GAS", "ROBOTS", true,10));

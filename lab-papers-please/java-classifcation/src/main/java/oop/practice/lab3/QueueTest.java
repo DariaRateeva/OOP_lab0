@@ -39,7 +39,7 @@ public class QueueTest {
         assertEquals("First", queue.dequeue());
         assertTrue(queue.isEmpty());
 
-        assertThrows(NoSuchElementException.class, queue::dequeue); // Empty queue
+        assertThrows(NoSuchElementException.class, queue::dequeue);
 
         queue.enqueue("A");
         queue.enqueue("B");
@@ -60,7 +60,7 @@ public class QueueTest {
         queue.enqueue(2);
         queue.enqueue(3);
 
-        assertThrows(IllegalStateException.class, () -> queue.enqueue(4)); // Full queue
+        assertThrows(IllegalStateException.class, () -> queue.enqueue(4));
 
         assertEquals(1, queue.dequeue());
         queue.enqueue(4);
@@ -69,7 +69,7 @@ public class QueueTest {
         assertEquals(4, queue.dequeue());
         assertTrue(queue.isEmpty());
 
-        assertThrows(NoSuchElementException.class, queue::dequeue); // Empty queue
+        assertThrows(NoSuchElementException.class, queue::dequeue);
     }
 
 }
