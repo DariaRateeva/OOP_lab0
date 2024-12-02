@@ -6,19 +6,22 @@ public class Main {
 
         Semaphore semaphore = new Semaphore();
 
-        Queue<Car> gasQueue = new LinkedListQueue<>();
-        Queue<Car> electricQueue = new LinkedListQueue<>();
+        Queue<Car> gasQueueWithPeople = new LinkedListQueue<>();
+        Queue<Car> gasQueueWithRobots = new LinkedListQueue<>();
+        Queue<Car> electricQueueWithPeople = new LinkedListQueue<>();
+        Queue<Car> electricQueueWithRobots = new LinkedListQueue<>();
 
-        CarStation gasStation = new CarStation(new PeopleDinner(), new GasStation(), gasQueue);
-        CarStation electricStation = new CarStation(new RobotDinner(), new ElectricStation(), electricQueue);
+        CarStation gasStationWithPeople = new CarStation(new PeopleDinner(), new GasStation(), gasQueueWithPeople);
+        CarStation gasStationWithRobots = new CarStation(new RobotDinner(), new GasStation(), gasQueueWithRobots);
+        CarStation electricStationWithPeople = new CarStation(new PeopleDinner(), new ElectricStation(), electricQueueWithPeople);
+        CarStation electricStationWithRobots = new CarStation(new RobotDinner(), new ElectricStation(), electricQueueWithRobots);
 
-        semaphore.registerStation("GAS", gasStation);
-        semaphore.registerStation("ELECTRIC", electricStation);
+        semaphore.registerStation("GAS_PEOPLE", gasStationWithPeople);
+        semaphore.registerStation("GAS_ROBOTS", gasStationWithRobots);
+        semaphore.registerStation("ELECTRIC_PEOPLE", electricStationWithPeople);
+        semaphore.registerStation("ELECTRIC_ROBOTS", electricStationWithRobots);
 
         Scheduler scheduler = new Scheduler(semaphore);
         scheduler.startScheduler(folderPath);
     }
 }
-
-
-

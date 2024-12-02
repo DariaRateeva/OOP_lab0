@@ -79,13 +79,16 @@ public class Semaphore {
     private void processFile(File file) {
         try {
             Car car = objectMapper.readValue(file, Car.class);
+            //System.out.println("Processing car with type: " + car.getType() + ", passengers: " + car.getPassengers());
 
-            CarStation station = stations.get(car.getType());
+            String stationKey = car.getType() + "_" + car.getPassengers();
+            CarStation station = stations.get(stationKey);
+
             if (station != null) {
                 station.addCar(car);
-                System.out.println("Car " + car.getId() + " added to " + car.getType() + " station.");
+                System.out.println("Car " + car.getId() + " added to " + stationKey + " station.");
             } else {
-                System.out.println("No station registered for car type: " + car.getType());
+                System.err.println("No station registered for car type: " + stationKey);
             }
 
             if (!file.delete()) {
@@ -95,6 +98,7 @@ public class Semaphore {
             System.err.println("Failed to process file: " + file.getName() + " - " + e.getMessage());
         }
     }
+
 
     public void serveAll() {
         stations.values().forEach(CarStation::serveCars);
@@ -120,24 +124,37 @@ public class Semaphore {
         int totalDining = PeopleDinner.getTotalDining() + RobotDinner.getTotalDining();
         int totalNotDining = PeopleDinner.getTotalNotDining() + RobotDinner.getTotalNotDining();
 
-        Map<String, Integer> carCounts = new HashMap<>();
+        Map<String, Integer> typeCounts = new HashMap<>();
         Map<String, Integer> consumptionTotals = new HashMap<>();
 
+        typeCounts.put("GAS", 0);
+        typeCounts.put("ELECTRIC", 0);
+        consumptionTotals.put("GAS", 0);
+        consumptionTotals.put("ELECTRIC", 0);
+
         for (Map.Entry<String, CarStation> entry : stations.entrySet()) {
-            String type = entry.getKey();
+            String stationKey = entry.getKey();
             CarStation station = entry.getValue();
 
-            carCounts.put(type, station.getTotalCarsProcessed());
-            consumptionTotals.put(type, station.getTotalConsumption());
+            if (stationKey.startsWith("GAS")) {
+                typeCounts.put("GAS", typeCounts.get("GAS") + station.getTotalCarsProcessed());
+                consumptionTotals.put("GAS", consumptionTotals.get("GAS") + station.getTotalConsumption());
+            } else if (stationKey.startsWith("ELECTRIC")) {
+                typeCounts.put("ELECTRIC", typeCounts.get("ELECTRIC") + station.getTotalCarsProcessed());
+                consumptionTotals.put("ELECTRIC", consumptionTotals.get("ELECTRIC") + station.getTotalConsumption());
+            }
         }
 
         System.out.println("Totals:");
-        System.out.println("Car Counts by Type: " + carCounts);
-        System.out.println("Consumption Totals by Type: " + consumptionTotals);
-        System.out.println("PEOPLE: " + totalPeople);
-        System.out.println("ROBOTS: " + totalRobots);
-        System.out.println("DINING: " + totalDining);
-        System.out.println("NOT_DINING: " + totalNotDining);
+        System.out.println("{\"ELECTRIC\": " + typeCounts.get("ELECTRIC") +
+                ", \"GAS\": " + typeCounts.get("GAS") +
+                ", \"PEOPLE\": " + totalPeople +
+                ", \"ROBOTS\": " + totalRobots +
+                ", \"DINING\": " + totalDining +
+                ", \"NOT_DINING\": " + totalNotDining +
+                ", \"CONSUMPTION\": {\"ELECTRIC\": " + consumptionTotals.get("ELECTRIC") +
+                ", \"GAS\": " + consumptionTotals.get("GAS") + "}}");
     }
+
 }
 

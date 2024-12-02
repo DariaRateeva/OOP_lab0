@@ -8,6 +8,7 @@ public class ArrayQueue<T> implements Queue<T> {
 
     @SuppressWarnings("unchecked")
     public ArrayQueue(int capacity) {
+        //generic array
         data = (T[]) new Object[capacity];
         size = 0;
     }
